@@ -1,6 +1,8 @@
 package janken.model;
 
-public class JankenBean {
+import java.io.Serializable;
+
+public class JankenBean implements Serializable {
 	
 	public String yourChoiseString;
 	
@@ -8,7 +10,6 @@ public class JankenBean {
 	
 	public String jankenResult;
 
-	// 無駄なコードだが、setter/getterがないと、jspのrequestスコープでアクセスできない。
 //	public String getYourChoiseString() {
 //		return yourChoiseString;
 //	}

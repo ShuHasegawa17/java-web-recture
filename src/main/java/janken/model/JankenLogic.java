@@ -13,7 +13,7 @@ public class JankenLogic {
 		jankenMap.put(1, "チョキ");
 		jankenMap.put(2, "パー");
 	}
-
+	
 	public JankenBean executeJanken(int yourChoice) {
 		// PCのじゃんけんの手
 		int pcChoice = (int) Math.floor(Math.random() * 3);
