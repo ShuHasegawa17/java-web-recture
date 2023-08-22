@@ -21,19 +21,20 @@ import janken.model.JankenLogic;
 @WebServlet("/JankenSessionServlet")
 public class JankenSessionServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public JankenSessionServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public JankenSessionServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		RequestDispatcher dispatch = request.getRequestDispatcher("WEB-INF/jankensession/index.jsp");
 		dispatch.forward(request, response);
 	}
@@ -41,26 +42,26 @@ public class JankenSessionServlet extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
 		request.setCharacterEncoding("UTF-8");
 		String value = request.getParameter("janken");
-		
+
 		JankenLogic logic = new JankenLogic();
 		JankenBean janken = logic.executeJanken(Integer.parseInt(value));
-		
+
 		HttpSession session = request.getSession();
-		
-		
+
 		@SuppressWarnings("unchecked")
-		List<JankenBean> jankenList =  (List<JankenBean>)session.getAttribute("jankenList");
-		if(jankenList == null) {
+		List<JankenBean> jankenList = (List<JankenBean>) session.getAttribute("jankenList");
+		if (jankenList == null) {
 			jankenList = new ArrayList<>();
 		}
 		jankenList.add(janken);
-		
+
 		session.setAttribute("jankenList", jankenList);
-		
+
 		RequestDispatcher dispatch = request.getRequestDispatcher("WEB-INF/jankensession/result.jsp");
 		dispatch.forward(request, response);
 	}
